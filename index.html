@@ -1,9 +1,9 @@
-<!Doctype: HTML w/ Processing>
+<!DOCTYPE html>
 <html>
   <head>
-      <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
-      <title>The Silva Experience Codes o</title>
-      <script type="text/javascript" src="/processing.js"></script>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>The Silva Experience Codes o</title>
+    <script type="text/javascript" src="/processing.js"></script>
   </head>
   
   <body>
@@ -11,112 +11,108 @@
     <p>Processing demo</p>
     
     <script type="text/processing.js">
-      //SAMPLE PROCESSING CODE -- ENDS LINE 71
-     import processing.sound.*;
+      // SAMPLE PROCESSING CODE -- ENDS LINE 71
+      import processing.sound.*;
 
-PImage Icon;
-PImage bg, bg2;
-PImage pipeT, pipeB;
-int bgx;
-int y, Vy;
-int px, py; 
-int score = 0;
-boolean gameState;
-int scoreBoard;
-//SoundFile song1;
-SoundFile song2;
-SoundFile Ding;
- 
-void setup(){
-  size(1000,1000);
-  bg = loadImage("Best_Invincible_BG.png");
-  bg2 = loadImage("Best_Invincible_BG.png");
-  y = 0;
-  Vy = 0;
-  Icon = loadImage("Better_invincible_mark__png.png");
-  px = width;
-  py = int(random(200, height-200));
-  pipeT = loadImage("MetalPipeT.png");
-  pipeB = loadImage("MetalPipeT.png");
-  gameState = true;
-  
-  music();
-}
-void draw(){
-  if(gameState){
-    drawBG();
-    drawIcon();
-    drawPipes();
-    //drawPipes2();
-    checkCrash();
-    scoreBoard();
-    //music();
-  }
-}
-void scoreBoard(){
-  fill(255,0,0);
-  textSize(30);
-  text("Score:"+ score , width -170, 40);
-}
- 
- 
- 
-void checkCrash(){
-  //TOP
-  if(px < 75 + Icon.width && px > 25 && y - py > 100){
-    gameState = false;
-  }
-  //Bottom
-  if(px < 75 + Icon.width && px > 25 && py - y > 100){
-    gameState = false;
-  }
-}
-void mousePressed(){
-  Vy = -10;
-  Ding=new SoundFile(this, "ding-126626.mp3");
-  Ding.play();
-}
- 
-void drawPipes(){
-  px = px - 3;
-  image(pipeT, px-25, py-pipeT.height-100);
-  image(pipeB, px-25, py+150);
-  if(px < -50){
-    px = width + 50;
-    py = int(random(100,height-100));
-    score++;
-  }
-}
+      PImage Icon;
+      PImage bg, bg2;
+      PImage pipeT, pipeB;
+      int bgx;
+      int y, Vy;
+      int px, py; 
+      int score = 0;
+      boolean gameState;
+      int scoreBoard;
+      SoundFile song2;
+      SoundFile Ding;
 
+      void setup() {
+        size(1000, 1000);
+        bg = loadImage("Best_Invincible_BG.png");
+        bg2 = loadImage("Best_Invincible_BG.png");
+        y = 0;
+        Vy = 0;
+        Icon = loadImage("Better_invincible_mark__png.png");
+        px = width;
+        py = int(random(200, height-200));
+        pipeT = loadImage("MetalPipeT.png");
+        pipeB = loadImage("MetalPipeT.png");
+        gameState = true;
+        
+        music();
+      }
 
- 
-void drawIcon(){
-  image(Icon, 50, y);
-  y += Vy;
-  Vy++;
-  if(y > height-Icon.height){
-    y = height-Icon.height;
-  }
-}
-void drawBG(){
-  image(bg,bgx,0);
-  image(bg2, bgx + bg.width, 0);
-  image(bg, bgx+2*bg.width, 0);
-  bgx-= 1;  
-  if(bgx < -2*bg.width){
-    bgx = 0;
-  }
-}
+      void draw() {
+        if (gameState) {
+          drawBG();
+          drawIcon();
+          drawPipes();
+          checkCrash();
+          scoreBoard();
+        }
+      }
 
-void music(){
-  //song1=new SoundFile(this, "Wii Music.mp3");         //FIND A DIFFERENT SONG BECAUSE THIS ONE DOESN'T WORK (NOT ALL SONGS ARE EQUAL)
-  //song1.play();
-  song2=new SoundFile(this, "jellyfish jam.mp3");
-  song2.play();
-}
+      void scoreBoard() {
+        fill(255, 0, 0);
+        textSize(30);
+        text("Score:" + score, width - 170, 40);
+      }
+
+      void checkCrash() {
+        // TOP
+        if (px < 75 + Icon.width && px > 25 && y - py > 100) {
+          gameState = false;
+        }
+        // BOTTOM
+        if (px < 75 + Icon.width && px > 25 && py - y > 100) {
+          gameState = false;
+        }
+      }
+
+      void mousePressed() {
+        Vy = -10;
+        Ding = new SoundFile(this, "ding-126626.mp3");
+        Ding.play();
+      }
+
+      void drawPipes() {
+        px = px - 3;
+        image(pipeT, px - 25, py - pipeT.height - 100);
+        image(pipeB, px - 25, py + 150);
+        if (px < -50) {
+          px = width + 50;
+          py = int(random(100, height - 100));
+          score++;
+        }
+      }
+
+      void drawIcon() {
+        image(Icon, 50, y);
+        y += Vy;
+        Vy++;
+        if (y > height - Icon.height) {
+          y = height - Icon.height;
+        }
+      }
+
+      void drawBG() {
+        image(bg, bgx, 0);
+        image(bg2, bgx + bg.width, 0);
+        image(bg, bgx + 2 * bg.width, 0);
+        bgx -= 1;  
+        if (bgx < -2 * bg.width) {
+          bgx = 0;
+        }
+      }
+
+      void music() {
+        // song1 = new SoundFile(this, "Wii Music.mp3"); // FIND A DIFFERENT SONG BECAUSE THIS ONE DOESN'T WORK (NOT ALL SONGS ARE EQUAL)
+        // song1.play();
+        song2 = new SoundFile(this, "jellyfish jam.mp3");
+        song2.play();
+      }
     </script>
     <canvas id="sketch" style="border: 1px solid black;"></canvas>
-    
   </body>
-  
 </html>
+
